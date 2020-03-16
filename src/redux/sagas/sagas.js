@@ -16,7 +16,7 @@ function* getData(action) {
 
 function* getEpisodes(action) {
     try {
-       const episodes = yield call(fetchEpisodes);
+       const episodes = yield call(fetchEpisodes, action);
        yield put(receiveEpisodesData(episodes));
     } catch (e) {
        console.log(e)
@@ -25,7 +25,7 @@ function* getEpisodes(action) {
 
  function* getCharacters(action) {
     try {
-       const characters = yield call(fetchCharacters);
+       const characters = yield call(fetchCharacters, action);
        yield put(receiveCharactersData(characters));
     } catch (e) {
        console.log(e)
