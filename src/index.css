@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+header {
+  margin: 0 !important;
+}
+
+input {
+  color: white !important;
+}
+
+.makeStyles-search-4 label {
+  color: white;
+}

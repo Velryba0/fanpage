@@ -1,0 +1,14 @@
+.fanpage-home-container-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.MuiPaper-root {
+    width: 270px;
+    margin-top: 15px;
+}
+/* 
+.fanpage-home-container-cards div button div:nth-child(1) {
+    background-size: cover;
+} */
