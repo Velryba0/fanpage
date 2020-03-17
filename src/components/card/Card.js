@@ -20,19 +20,19 @@ const useStyles = makeStyles({
   
 });
 
-export default function CardChar({name, status, species, gender, image, location, val, created,  ...others}) {
+export default function CardChar({name, status, species, gender, image, location, val, created,  time, ...others}) {
   const classes = useStyles();
-  console.log(created)
+  console.log(val)
 //   moment.locale('es')
   let day = moment(created).format('DD-MMM-YYYY')
-  console.log(day)
+  // console.log(day)
   return (
     <>
         <Grow in={!val}
         style={{ transformOrigin: '0 0 0' }}
             {...(!val ? { timeout: 1000 } : {})}>
             <Card className={classes.root} elevation={4}>
-                <CardActionArea>
+                <CardActionArea onClick={(e) => {console.log(e)}}>
                     <CardMedia
                     className={classes.media}
                     image={image}
