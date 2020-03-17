@@ -35,7 +35,6 @@ function* getEpisodes(action) {
  }
 
  function* getSearchCharacters(action) {
-    console.log(action)
    try {
       const searchCharacters = yield call(fetchSearchCharacter, action);
       yield put(receiveSearchCharactersData(searchCharacters));

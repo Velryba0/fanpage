@@ -12,7 +12,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import { requestSearchCharactersData } from '../redux/ducks/character/searchCharacter';
 import { requestSearchEpisodesData } from '../redux/ducks/episodes/searchEpisode';
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -72,6 +71,11 @@ const useStyles = makeStyles(theme => ({
 export default function SearchAppBar() {
     const classes = useStyles();
     const [value, setValue] = useState('');
+
+    const [searchActive, setSearchActive] = useState(false)
+
+    const resultSearch = useSelector(state => state)
+
     const dispatch = useDispatch();
 
     const searchChar = (e) => {

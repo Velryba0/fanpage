@@ -52,7 +52,7 @@ const useStyles = makeStyles({
 
 export default function SimpleDialog(props) {
   const classes = useStyles();
-  const { name, status, species, gender, image, location, setOpen, day, open, origin } = props;
+  const { name, status, species, gender, image, location, setOpen, day,  time, open, origin } = props;
 
   const handleClose = () => {
     setOpen(false)

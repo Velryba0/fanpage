@@ -29,7 +29,6 @@ export const fetchCharacters = async (pag) => {
 }
 
 export const fetchSearchCharacter = async (name) => {
-    console.log(name)
     try {
         const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${name.page}&name=${name.data}`);
         const data = await response.json()
