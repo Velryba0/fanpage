@@ -8,13 +8,9 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 
 import { requestSearchCharactersData } from '../redux/ducks/character/searchCharacter';
 import { requestSearchEpisodesData } from '../redux/ducks/episodes/searchEpisode';
-
-const filter = createFilterOptions();
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,17 +73,11 @@ export default function SearchAppBar() {
     const [value, setValue] = useState('');
     const [searchActive, setSearchActive] = useState(false)
 
-    console.log(value)
-
     const resultSearch = useSelector(state => state)
-
-    console.log(resultSearch)
 
     const dispatch = useDispatch();
 
     const searchChar = (e) => {
-      // fetchSearchCharacter(value);
-      console.log(value)
       if(value === '') {
         document.location.reload();
       } else {

@@ -1,10 +1,10 @@
-import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { REQUEST_LOCATIONS_DATA, receiveLocationsData} from '../ducks/locations/locations';
 import { REQUEST_EPISODES_DATA, receiveEpisodesData } from '../ducks/episodes/episodes';
 import { REQUEST_CHARACTERS_DATA, receiveCharactersData } from '../ducks/character/characters';
 import { REQUEST_SEARCH_CHARACTER_DATA, receiveSearchCharactersData } from '../ducks/character/searchCharacter';
 import { REQUEST_SEARCH_EPISODES_DATA, receiveSearchEpisodesData } from '../ducks/episodes/searchEpisode';
-import FetchData, { fetchEpisodes, fetchCharacters, fetchSearch, fetchSearchCharacter, fetchSearchEpisode } from '../../utils/FetchData';
+import FetchData, { fetchEpisodes, fetchCharacters, fetchSearchCharacter, fetchSearchEpisode } from '../../utils/FetchData';
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* getData(action) {
@@ -35,7 +35,6 @@ function* getEpisodes(action) {
  }
 
  function* getSearchCharacters(action) {
-    console.log(action)
    try {
       const searchCharacters = yield call(fetchSearchCharacter, action);
       yield put(receiveSearchCharactersData(searchCharacters));

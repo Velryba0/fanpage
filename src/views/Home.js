@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import moment from 'moment';
-import { requesLocationsData } from '../redux/ducks/locations/locations';
 import { requestCharactersData } from '../redux/ducks/character/characters';
-import { requestEpisodesData } from '../redux/ducks/episodes/episodes';
 import { requestSearchCharactersData } from '../redux/ducks/character/searchCharacter';
-import { requestSearchEpisodesData } from '../redux/ducks/episodes/searchEpisode';
 
 import CardChar from '../components/card/Card';
 import Paginations from "../components/Paginations";
@@ -19,15 +15,9 @@ const Home = () => {
 
     const searchData = useSelector(state => state.searchCharacter);
     const characterData = useSelector(state => state.characters);
-    const episodesData = useSelector(state => state.episodes)
     const dispatch = useDispatch();
 
-    // console.log('location', locationsData);
-    console.log('characters',characterData);
-    // console.log(Object.entries(searchData).length);
-
     let regex = /name=(.*)/
-    let day = moment()
     let val = typeof characterData.results === 'undefined' ? true : false;
     let searchVal = Object.entries(searchData).length > 0 ? false : true;
     let nextVal = Object.entries(!searchVal ? (searchData.info) ? searchData.info.next : document.location.reload() : '').length > 0 ? true : false;
@@ -35,9 +25,6 @@ const Home = () => {
 
     let rex = nextVal ? (searchData.info.next.match(regex)) ? searchData.info.next.match(regex).slice(1) : 'prueba' : '';
     let rexPrev = prevVal ? (searchData.info.prev.match(regex)) ? searchData.info.prev.match(regex).slice(1) : 'prueba' : '';
-    console.log(rex[0])
-    console.log(rexPrev[0])
-
 
     const Cards = Object.keys(!val ? characterData.results : []).map(key => (
         <CardChar 
@@ -71,12 +58,9 @@ const Home = () => {
 
 
     useEffect(() => {
-        // dispatch(requesLocationsData('prueba'));
         if(searchVal) {
             dispatch(requestCharactersData(pag));
-            // dispatch(requestEpisodesData());
             setTotalPages(!val ? characterData.info.pages : 0);
-            console.log(pag)
         } else {
             dispatch(requestSearchCharactersData(nextVal ? rex[0] : rexPrev[0], pag));
             setTotalPages(!searchVal ? searchData.info.pages : 0)
