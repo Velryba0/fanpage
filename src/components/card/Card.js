@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,21 +10,28 @@ import Typography from '@material-ui/core/Typography';
 import Grow from '@material-ui/core/Grow';
 import moment from 'moment';
 
+import SimpleDialog from '../../common/Dialog'
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
   },
   media: {
-    height: 140,
+    height: 300,
   },
   
 });
 
-export default function CardChar({name, status, species, gender, image, location, val, created,  time, ...others}) {
+export default function CardChar({name, status, species, gender, image, location, val, created,  time, origin, ...others}) {
   const classes = useStyles();
-  console.log(val)
+  
+  const [open, setOpen] = useState(false);
 //   moment.locale('es')
-  let day = moment(created).format('DD-MMM-YYYY')
+  let day = moment(created).format('DD-MMM-YYYY');
+
+  const handleClose = () => {
+    setOpen(false)
+  }
   // console.log(day)
   return (
     <>
@@ -32,7 +39,7 @@ export default function CardChar({name, status, species, gender, image, location
         style={{ transformOrigin: '0 0 0' }}
             {...(!val ? { timeout: 1000 } : {})}>
             <Card className={classes.root} elevation={4}>
-                <CardActionArea onClick={(e) => {console.log(e)}}>
+                <CardActionArea onClick={(e) => {setOpen(true)}}>
                     <CardMedia
                     className={classes.media}
                     image={image}
@@ -47,16 +54,21 @@ export default function CardChar({name, status, species, gender, image, location
                     </Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions>
-                    <Button size="small" color="primary">
-                    Share
-                    </Button>
-                    <Button size="small" color="primary">
-                    Learn More
-                    </Button>
-                </CardActions>
             </Card>
         </Grow>
+        <SimpleDialog 
+        open={open} 
+        onClose={handleClose} 
+        name={name}
+        image={image}
+        status={status}
+        species={species}
+        gender={gender}
+        location={location}
+        day={day}
+        setOpen={setOpen}
+        origin={origin}
+        />
     </>
   );
 }

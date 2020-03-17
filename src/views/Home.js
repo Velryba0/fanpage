@@ -10,7 +10,7 @@ import { requestSearchEpisodesData } from '../redux/ducks/episodes/searchEpisode
 import CardChar from '../components/card/Card';
 import Paginations from "../components/Paginations";
 
-import './home.styles.css';
+import './home.styles.scss';
 
 const Home = () => {
 
@@ -49,7 +49,9 @@ const Home = () => {
         location={characterData.results[key].location.name}
         val={val}
         time={characterData.results[key].id}
-        created={characterData.results[key].created}/>
+        created={characterData.results[key].created}
+        origin={characterData.results[key].origin.name}
+        species={characterData.results[key].species}/>
     ));
 
     const searchCards = Object.keys(!searchVal ? searchData.results : []).map(key => (
@@ -62,7 +64,9 @@ const Home = () => {
         location={searchData.results[key].location.name}
         val={searchVal}
         time={searchData.results[key].id}
-        created={searchData.results[key].created}/>
+        created={searchData.results[key].created}
+        origin={searchData.results[key].origin.name}
+        species={searchData.results[key].species}/>
     ));
 
 
