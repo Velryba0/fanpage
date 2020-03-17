@@ -19,9 +19,28 @@ export const fetchEpisodes = async (data) => {
 }
 
 export const fetchCharacters = async (pag) => {
-    console.log(pag)
     try {
         const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${pag.data}`);
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const fetchSearchCharacter = async (name) => {
+    try {
+        const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${name.page}&name=${name.data}`);
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const fetchSearchEpisode = async (name) => {
+    try {
+        const response = await fetch(`https://rickandmortyapi.com/api/episode/?name=${name.data}`);
         const data = await response.json()
         return data
     } catch (error) {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,10 +8,9 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 
-const filter = createFilterOptions();
+import { requestSearchCharactersData } from '../redux/ducks/character/searchCharacter';
+import { requestSearchEpisodesData } from '../redux/ducks/episodes/searchEpisode';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,7 +44,6 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(7),
     height: '100%',
     position: 'absolute',
-    right: '0px',
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
@@ -71,13 +69,28 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SearchAppBar() {
-    const [value, setValue] = useState(null);
     const classes = useStyles();
+    const [value, setValue] = useState('');
 
-    console.log(value)
+    const [searchActive, setSearchActive] = useState(false)
 
-    const data = useSelector(state => state.episodes.results)
-    console.log(data)
+    const resultSearch = useSelector(state => state)
+
+    const dispatch = useDispatch();
+
+    const searchChar = (e) => {
+      if(value === '') {
+        document.location.reload();
+      } else {
+        dispatch(requestSearchCharactersData(value, 1));
+        dispatch(requestSearchEpisodesData(value));
+      }
+    }
+
+    const searchInput = (e) => {
+      setValue(e.target.value)
+    }
+
 
   return (
     <div className={classes.root} >
@@ -95,54 +108,17 @@ export default function SearchAppBar() {
             Rick y Morty
           </Typography>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <Autocomplete
-            value={value}
-            onChange={(event, newValue) => {
-                if (newValue && newValue.inputValue) {
-                setValue({
-                    title: newValue.inputValue,
-                });
-
-                return;
-                }
-
-                setValue(newValue);
-            }}
-            filterOptions={(options, params) => {
-                const filtered = filter(options, params);
-
-                if (params.inputValue !== '') {
-                filtered.push({
-                    inputValue: params.inputValue,
-                    title: `Add "${params.inputValue}"`,
-                });
-                }
-
-                return filtered;
-            }}
-            id="autocomplete"
-            options={data ? data : []}
-            getOptionLabel={option => {
-                // e.g value selected with enter, right from the input
-                if (typeof option === 'string') {
-                    console.log(option)
-                return option;
-                }
-                if (option.inputValue) {
-                    console.log(option.inputValue)
-                return option.inputValue;
-                }
-                return option.name;
-            }}
-            renderOption={option => option.name}
-            style={{ width: 300 }}
-            freeSolo
-            renderInput={params => (
-                <TextField {...params} label="Busca por episodio o personaje" variant="outlined" />
-            )}
+            <IconButton type='submit' onClick={searchChar}>
+              <SearchIcon/>
+            </IconButton>
+            <InputBase
+              placeholder="Buscar..."
+              onChange={searchInput}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
             />
           </div>
         </Toolbar>

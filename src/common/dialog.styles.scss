@@ -1,0 +1,24 @@
+.MuiPaper-root {
+    .MuiPaper-root {
+        margin: 0 !important;
+    }
+}
+
+.MuiDialog-container {
+    .MuiPaper-root {
+        width: 450px !important;
+    }
+}
+
+.MuiCardHeader-content {
+    & span {
+        color: white !important;
+        font-family: 'Fjalla One', sans-serif;
+    }
+}
+
+.MuiCardContent-root {
+    & p, h2 {
+        font-family: 'Fjalla One', sans-serif;
+    }
+}
