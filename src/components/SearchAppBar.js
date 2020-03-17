@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -71,6 +71,7 @@ const useStyles = makeStyles(theme => ({
 export default function SearchAppBar() {
     const classes = useStyles();
     const [value, setValue] = useState('');
+
     const [searchActive, setSearchActive] = useState(false)
 
     const resultSearch = useSelector(state => state)
@@ -81,7 +82,6 @@ export default function SearchAppBar() {
       if(value === '') {
         document.location.reload();
       } else {
-        setSearchActive(true)
         dispatch(requestSearchCharactersData(value, 1));
         dispatch(requestSearchEpisodesData(value));
       }

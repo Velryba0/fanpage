@@ -65,7 +65,7 @@ const Home = () => {
             dispatch(requestSearchCharactersData(nextVal ? rex[0] : rexPrev[0], pag));
             setTotalPages(!searchVal ? searchData.info.pages : 0)
         }
-    }, [val, pag, rex[0]])
+    }, [])
 
     return (
         <>
