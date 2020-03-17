@@ -16,7 +16,7 @@ const locationMiddleware = createSagaMiddleware();
 // mount it on the Store
 const store = createStore(
     rootReducer,
-    compose(applyMiddleware(locationMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+    compose(applyMiddleware(locationMiddleware))
 )
 
 // then run the saga
