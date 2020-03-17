@@ -30,7 +30,7 @@ const Home = () => {
     let day = moment()
     let val = typeof characterData.results === 'undefined' ? true : false;
     let searchVal = Object.entries(searchData).length > 0 ? false : true;
-    let nextVal = Object.entries(!searchVal ? searchData.info.next : '').length > 0 ? true : false;
+    let nextVal = Object.entries(!searchVal ? (searchData.info) ? searchData.info.next : document.location.reload() : '').length > 0 ? true : false;
     let prevVal = Object.entries(!searchVal ? searchData.info.prev : '').length > 0 ? true : false;
 
     let rex = nextVal ? (searchData.info.next.match(regex)) ? searchData.info.next.match(regex).slice(1) : 'prueba' : '';
