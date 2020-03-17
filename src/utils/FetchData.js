@@ -35,7 +35,6 @@ export const fetchSearchCharacter = async (name) => {
         const data = await response.json()
         return data
     } catch (error) {
-        document.location.reload();
         console.log(error);
     }
 }
